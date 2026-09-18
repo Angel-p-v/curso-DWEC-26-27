@@ -1,0 +1,13 @@
+{
+  "name": "00_tema_introduccion",
+  "version": "1.0.0",
+  "description": "ejemplo basico uso de javascript",
+  "license": "ISC",
+  "author": "Ángel PV",
+  "type": "module",
+  "main": "ejercicio1.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lanzar": "node ejercicio1.js"
+  }
+}
