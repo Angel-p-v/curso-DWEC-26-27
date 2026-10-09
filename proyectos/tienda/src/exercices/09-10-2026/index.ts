@@ -3,8 +3,8 @@
 //
 //------------------------ IMPORTACIONES --------------------------------------------------
 
-import { products } from "../../data/products";
-import type { Product } from "../../types/product";
+// import { products } from "../../data/products";
+// import type { Product } from "../../types/product";
 import type { Cart } from "../../types/cart";
 
 
@@ -44,14 +44,6 @@ import type { Cart } from "../../types/cart";
 // 1. crear un type (cart.ts) llamado Carline q tenga el id del producto y la cantidad a comprar (exportarlo)
 // funciones para añadir elementos al producto, borrar elementos, obtener el total del carrito 
 export function addToCart(cart: Cart, productId: number): Cart | boolean {
-  // const exits = cart.some(p => p.productId === productId);
-  // if (exits) {
-  //   return cart
-  //     .map(p => {
-  //       return p.quantity === productId ? { ...p, quantity: p.quantity + 1 } : p;
-  //     })
-  // }
-  // return [...cart, { productId, quantity: 1 }]
   return cart
     .some(p => p.productId === productId) ? cart
       .map(p => p.quantity > 0 ? { ...p, quantity: + 1 } : { ...p, quantity: 1 }) : false
@@ -60,11 +52,15 @@ export function addToCart(cart: Cart, productId: number): Cart | boolean {
 export function removeFromCart(cart: Cart, productId: number): Cart | boolean {
   return cart
     .some(p => p.productId === productId) ? cart.map(p => p.quantity > 0 ? { ...p, quantity: -1 } : p) : false
-
 }
 
-export function obtainTotal(cart: Cart, productId: number): number {
-  return
+export function obtainTotal(cart: Cart): number {
+  let total: number = 0
+  const numeros: number[] = cart.map(p => p.quantity);
+  for (const numero of numeros) {
+    total += numero
+  }
+  return total
 }
 
 // ----------------------- INICIO DE LA APLICACION ----------------------------------------
