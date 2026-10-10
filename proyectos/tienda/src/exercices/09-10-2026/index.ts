@@ -55,7 +55,7 @@ export function removeFromCart(cart: Cart, productId: number): Cart | boolean {
 }
 
 export function obtainTotal(cart: Cart): number {
-  cart.reduce( (total,producto) => total + producto.quantity , 0 )
+  return cart.reduce( (total,producto) => total + producto.quantity , 0 )
 }
 
 // ----------------------- INICIO DE LA APLICACION ----------------------------------------
