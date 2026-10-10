@@ -55,12 +55,7 @@ export function removeFromCart(cart: Cart, productId: number): Cart | boolean {
 }
 
 export function obtainTotal(cart: Cart): number {
-  let total: number = 0
-  const numeros: number[] = cart.map(p => p.quantity);
-  for (const numero of numeros) {
-    total += numero
-  }
-  return total
+  cart.reduce( (total,producto) => total + producto.quantity , 0 )
 }
 
 // ----------------------- INICIO DE LA APLICACION ----------------------------------------
