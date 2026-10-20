@@ -10,3 +10,5 @@ export function createDiscount(percent: number): PriceRule {
     return price * (1 - percent / 100);
   }
 }
+
+

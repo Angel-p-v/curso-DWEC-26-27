@@ -9,8 +9,17 @@
 </head>
 
 <body>
-  <div id="app"></div>
-  <script type="module" src="/src/main.ts"></script>
+  <section class="controls">
+    <input id='search' type="search" placeholder="buscar un prodcuto" />
+    <label>
+      <input id="only-in-stock" type="checkbox" />
+      Solo en stock
+    </label>
+    <button id="btn-clicks" type="button"> Clicks 0</button>
+  </section>
+  <ul id="list" class="list"></ul>
+
+  <script type="module" src="/src/exercices/dom/index.ts"></script>
 </body>
 
 </html>
