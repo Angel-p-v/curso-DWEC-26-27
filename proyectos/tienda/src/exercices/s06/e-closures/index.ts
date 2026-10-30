@@ -1,5 +1,5 @@
 import type { Light, TrafficLight } from "../../../types/light";
-import type { LoginAnswer } from "../../../types/login"; LoginAnswer, 
+import type { LoginAnswer } from "../../../types/login";
 
 export function createTurnDispenser(letter: string): () => string {
   let n = 1
