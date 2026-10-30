@@ -1,35 +1,23 @@
-import { students } from "./services/students"
-import { avarage, isPass } from "./utils/grades"
+import { ListFormat } from "typescript";
+import { createCard, getElement } from "./components/dom";
+import { products } from "./services/products";
 
-// const avarageText = document.getElementById("avarage");
-const avarageText = document.querySelector("#average") // <-- busca 
-const listU = document.querySelector("#student-list")
 
-if (!(avarageText instanceof HTMLParagraphElement)) {
-  throw new Error("falta el parrofo con id avarage") // <-- comprueba
+const h1Product = document.createElement("h1")
+h1Product.classList.add("h1Product")
+const divProducts = getElement("#products", HTMLDivElement)
+h1Product.textContent = "Productos"
+divProducts.append(h1Product)
+
+const ulProducts = document.createElement("ul")
+
+for (const product of products) {
+  // const liProduct = document.createElement("li")
+  // liProduct.textContent = `Nombre ${product.name} - Precio ${product.price} - Stock ${product.stock}`
+  // ulProducts.append(liProduct)
+  ulProducts.append(createCard(product))
 }
+divProducts.append(ulProducts)
 
-if (!(listU instanceof HTMLUListElement)) {
-  throw new Error("falta la etiqueta ul")
-}
 
-avarageText.textContent = `Media: ${avarage(students).toFixed(2)}` // <-- modifica
-for (const student of students) {
-  const item = document.createElement("li")
-  item.textContent = `Estudiante: ${student.name} y su calificacion es: ${student.grade}`
-  item.style.color = isPass(student) ? "green" : "red"
-  listU.appendChild(item)
-}
 
-// busqueda
-const inputSearch = document.createElement("input")
-inputSearch.type = "text"
-inputSearch.placeholder = "Escriba nombre para buscar"
-inputSearch.style.backgroundColor = "gray"
-
-// enviar
-const btnSearch = document.createElement("button")
-btnSearch.textContent = "buscar"
-
-avarageText.appendChild(inputSearch)
-avarageText.appendChild(btnSearch)
