@@ -1,5 +1,5 @@
 import "./style.css";
-import { createCard, getElement } from "./components/dom";
+import { createCard, getElement, createButton, resetButton } from "./components/dom";
 import { products } from "./services/products";
 
 
@@ -47,8 +47,10 @@ divProducts.append(ulProducts)
 */
 
 const seccion = document.createElement("section")
-const btnClick = document.createElement("button")
-btnClick.textContent = "Clikc: 0"
-seccion.append(btnClick)
 divProducts.append(document.createElement("hr"))
 divProducts.append(seccion)
+
+const btnClick = createButton(["btnClicks"])
+const btnReset = resetButton("btnClicks")
+seccion.append(btnClick)
+seccion.append(btnReset)

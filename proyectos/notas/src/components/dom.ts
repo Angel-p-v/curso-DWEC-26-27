@@ -32,12 +32,32 @@ export function createTextSpan(text: string, cssArray: string[]): HTMLSpanElemen
   return span
 }
 
+
+let clicks = 0
 // crear un contador de clicks usando button y etiqueta
 export function createButton(cssArray: string[]): HTMLButtonElement {
+  const button = document.createElement("button")
 
+  button.textContent = `Clicks: ${clicks}`
+  button.classList.add(...cssArray)
 
+  button.addEventListener('click', () => {
+    clicks++
+    button.textContent = `Clicks: ${clicks}`
+  })
 
-
+  return button
 }
 
 // crear un boton para reiniciar el contador
+export function resetButton(claseBtn: string) {
+  const btnReinicio = document.createElement("button")
+  btnReinicio.textContent = "Reiniciar clicks"
+
+  btnReinicio.addEventListener("click", () => {
+    const btn = getElement(`.${claseBtn}`, HTMLButtonElement)
+    btn.textContent = "Clicks: 0"
+    clicks = 0
+  });
+  return btnReinicio
+}
