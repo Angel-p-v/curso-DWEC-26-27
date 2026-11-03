@@ -22,3 +22,22 @@ export function createCard(p: Product): HTMLElement {
   return li
 }
 
+
+// crear 1 funcion que genere etiquetas con el texto que le paso como parametro
+// y con un array de clases
+export function createTextSpan(text: string, cssArray: string[]): HTMLSpanElement {
+  const span = document.createElement("span")
+  span.classList.add(...cssArray)
+  span.textContent = text
+  return span
+}
+
+// crear un contador de clicks usando button y etiqueta
+export function createButton(cssArray: string[]): HTMLButtonElement {
+
+
+
+
+}
+
+// crear un boton para reiniciar el contador

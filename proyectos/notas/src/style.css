@@ -1,0 +1,35 @@
+/* limpiamos todo mi estilo */
+
+/* limpiamos la lista dinamica ul */
+
+#products ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.card-price {
+  font-weight: bold;
+  color: #2e7d3f;
+}
+
+.card-agotado {
+  background: #f5f5f5;
+  color: #ff0000;
+  border-color: #eee;
+}
+
+.total {
+  font-size: 20px;
+}
