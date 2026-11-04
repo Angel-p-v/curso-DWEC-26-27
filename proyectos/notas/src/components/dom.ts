@@ -25,12 +25,12 @@ export function createCard(p: Product): HTMLElement {
 
 // crear 1 funcion que genere etiquetas con el texto que le paso como parametro
 // y con un array de clases
-export function createTextSpan(text: string, cssArray: string[]): HTMLSpanElement {
-  const span = document.createElement("span")
-  span.classList.add(...cssArray)
-  span.textContent = text
-  return span
-}
+// export function createTextSpan(text: string, cssArray: string[]): HTMLSpanElement {
+//   const span = document.createElement("span")
+//   span.classList.add(...cssArray)
+//   span.textContent = text
+//   return span
+// }
 
 
 let clicks = 0
@@ -61,3 +61,6 @@ export function resetButton(claseBtn: string) {
   });
   return btnReinicio
 }
+
+
+
