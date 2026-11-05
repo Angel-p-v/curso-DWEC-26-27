@@ -10,12 +10,14 @@ import { products } from "./services/products";
 import { students } from "./services/students";
 
 const divStudents = getElement("#students", HTMLDivElement);
+const divProducts = getElement("#products", HTMLDivElement);
 
 // 1. Crear un contenedor dedicado exclusivamente para la tabla
 const tableContainer = document.createElement("div");
+const tableContainer2 = document.createElement("div");
 
 // 2. Función para actualizar la tabla según el texto buscado
-function updateTableS(filterText: string = "") {
+export function updateTableS(filterText: string = "") {
   // Limpiar la tabla previa
   tableContainer.innerHTML = "";
 
@@ -39,19 +41,7 @@ const searchComponentS = filtrador((texto) => {
   updateTableS(texto);
 });
 
-// 4. Renderizado inicial: añadir el buscador y la tabla por primera vez
-divStudents.append(searchComponentS);
-divStudents.append(tableContainer);
-
-// Mostrar la lista completa al cargar la página
-updateTableS();
-
-divStudents.append(createHr())
-
-const divProducts = getElement("#products", HTMLDivElement);
-
-// 1. Crear un contenedor dedicado exclusivamente para la tabla
-const tableContainer2 = document.createElement("div");
+divProducts.append(createHr())
 
 // 2. Función para actualizar la tabla según el texto buscado
 function updateTableP(filterText: string = "") {
@@ -77,10 +67,15 @@ const searchComponentP = filtrador((texto) => {
 });
 
 // 4. Renderizado inicial: añadir el buscador y la tabla por primera vez
+
+divStudents.append(searchComponentS);
+divStudents.append(tableContainer);
+
 divProducts.append(searchComponentP);
 divProducts.append(tableContainer2);
 
 // Mostrar la lista completa al cargar la página
+updateTableS();
 updateTableP();
 
 
