@@ -27,9 +27,16 @@ export function createForm(): HTMLFormElement {
   inputMinuteRecipe.type = "number";
   checkBoxVegetariano.type = "checkbox";
 
+  inputTitleRecipe.name = "name";
+  inputMinuteRecipe.name = "minutes";
+  checkBoxVegetariano.name = "vegane";
+
+  inputTitleRecipe.required = true;
+  inputMinuteRecipe.required = true;
+
+
   inputTitleRecipe.placeholder = "Nombre de la receta...";
   inputMinuteRecipe.placeholder = "Tiempo de preparacion...";
-  checkBoxVegetariano.placeholder = "Vegetariano";
   labelCheckBox.textContent = "Vegetariano";
   btnCrearReceta.textContent = "Crear";
 
@@ -41,14 +48,20 @@ export function createRecipesUl(): HTMLUListElement {
   return document.createElement("ul");
 }
 
-export function createRecipeElementLi(recipe: Recipe): HTMLLIElement {
+export function createRecipeElementLi(recipe: Recipe, onDelete: (id: number) => void): HTMLLIElement {
   const li = document.createElement("li");
 
   const label = document.createElement("label");
   const btnBorrar = document.createElement("button");
 
-  label.textContent = `${recipe.name} · ${recipe.minutes}`;
+  const text = label.textContent = `${recipe.name} · ${recipe.minutes} `;
   btnBorrar.textContent = "Borrar";
+
+  if (recipe.vegetarian) {
+    label.textContent = `${text} · [V] `;
+  }
+
+  btnBorrar.addEventListener("click", () => onDelete(recipe.id));
 
   li.append(label, btnBorrar);
   return li;
@@ -56,4 +69,19 @@ export function createRecipeElementLi(recipe: Recipe): HTMLLIElement {
 
 export function labelResumen(): HTMLLabelElement {
   return document.createElement("label");
+}
+
+export function createCheckBoxFilter(filter: (opt: boolean) => void): HTMLLabelElement {
+  const text = document.createElement("label");
+  const checkbox = document.createElement("input");
+
+  checkbox.type = "checkbox";
+  text.textContent = "Solo recetas vegetarianas? ";
+
+  checkbox.name = "opt";
+
+  checkbox.addEventListener("change", () => filter(checkbox.checked));
+
+  text.append(checkbox);
+  return text;
 }
