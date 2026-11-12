@@ -81,4 +81,8 @@ export function createGameItemUl(game: Game, onToggle: (id: number) => void, onD
   return li;
 }
 
+export function createLabelResumen(): HTMLLabelElement {
+  return document.createElement("label");
+}
+
 

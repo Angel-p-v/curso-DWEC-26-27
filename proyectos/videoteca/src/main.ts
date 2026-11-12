@@ -1,15 +1,9 @@
-import { createFormGames, createGameItemUl, createSearchInput, createTitle, createUlGames, getElement } from "./components/dom";
+import { createFormGames, createGameItemUl, createLabelResumen, createSearchInput, createTitle, createUlGames, getElement } from "./components/dom";
 import { initialGames } from "./services/games";
 import type { Game } from "./types/game";
 
 
 //declaracion de variables
-const divApp = getElement("#app", HTMLDivElement);
-const title = createTitle("Videoteca");
-const listGames = createUlGames();
-const formulario = createFormGames();
-const inputSearch = createSearchInput();
-
 interface AppState {
   games: Game[];
   inputSearch: string;
@@ -17,10 +11,21 @@ interface AppState {
 
 let state: AppState = { games: initialGames.slice(), inputSearch: "" };
 
+const divApp = getElement("#app", HTMLDivElement);
+const title = createTitle("Videoteca");
+const listGames = createUlGames();
+const formulario = createFormGames();
+const inputSearch = createSearchInput();
+const labelResumen = createLabelResumen();
+
+
 // declaracion de funciones
 function render(): void {
   const text = state.inputSearch.trim().toLowerCase();
   const filtered = state.games.filter(g => g.title.toLowerCase().includes(text) || g.platform.toLowerCase().trim().includes(text));
+
+  const jugados = state.games.reduce((acc, g) => g.played ? acc + 1 : acc, 0);
+  labelResumen.textContent = `Jugados ${jugados} de ${state.games.length}`;
 
   const games = filtered.map(g => createGameItemUl(g, toggleState, gameDelete));
   listGames.replaceChildren(...games);
@@ -69,6 +74,7 @@ formulario.addEventListener("submit", (event) => {
   render();
 });
 
+
 // inicio de la aplicacion 
-divApp.append(title, formulario, inputSearch, listGames);
+divApp.append(title, formulario, inputSearch, listGames, labelResumen);
 render();
