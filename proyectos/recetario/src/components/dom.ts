@@ -1,3 +1,4 @@
+import type { Recipe } from "../types/recipe";
 
 export function getElement<T extends Element>(id: string, type: new () => T): T {
   const element = document.querySelector(id);
@@ -39,4 +40,8 @@ export function createForm(): HTMLFormElement {
 
 export function createRecipesUl(): HTMLUListElement {
   return document.createElement("ul");
+}
+
+export function createRecipeElementLi(recipe: Recipe): HTMLLIElement {
+
 }
