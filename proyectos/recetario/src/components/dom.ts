@@ -8,7 +8,6 @@ export function getElement<T extends Element>(id: string, type: new () => T): T 
   return element;
 }
 
-
 export function createTitle(title: string): HTMLHeadingElement {
   const titulo = document.createElement("h1");
   titulo.textContent = title;
@@ -43,5 +42,18 @@ export function createRecipesUl(): HTMLUListElement {
 }
 
 export function createRecipeElementLi(recipe: Recipe): HTMLLIElement {
+  const li = document.createElement("li");
 
+  const label = document.createElement("label");
+  const btnBorrar = document.createElement("button");
+
+  label.textContent = `${recipe.name} · ${recipe.minutes}`;
+  btnBorrar.textContent = "Borrar";
+
+  li.append(label, btnBorrar);
+  return li;
+}
+
+export function labelResumen(): HTMLLabelElement {
+  return document.createElement("label");
 }
