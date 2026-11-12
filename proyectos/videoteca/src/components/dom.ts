@@ -10,7 +10,7 @@ export function getElement<T extends Element>(selector: string, type: new () => 
 }
 
 // funcion para crear titulos
-export function createTitle(title: string): HTMLHeadElement {
+export function createTitle(title: string): HTMLHeadingElement {
   const label = document.createElement("h1");
   label.textContent = title;
   return label;
@@ -29,15 +29,26 @@ export function createFormGames(): HTMLFormElement {
   const form = document.createElement("form");
 
   const inputNombreJuego = document.createElement("input");
-  const inputPlataformaJuego = document.createElement("input");
+  const inputPlataformaJuego = document.createElement("select");
   const buttonEnviar = document.createElement("button");
 
+  inputNombreJuego.required = true;
+  inputPlataformaJuego.name = "platform";
+  inputNombreJuego.name = "title";
+
+  const consolas: string[] = ["PC", "Switch", "Ps4"];
+  const plataformas = consolas.map(plataforma => {
+    const opcion = document.createElement("option");
+    opcion.value = plataforma;
+    opcion.textContent = plataforma;
+    return opcion;
+  });
+  inputPlataformaJuego.append(...plataformas);
+
   inputNombreJuego.type = "text";
-  inputPlataformaJuego.type = "text";
   buttonEnviar.type = "submit";
 
   inputNombreJuego.placeholder = "Nombre del juego";
-  inputPlataformaJuego.placeholder = "Plataforma";
   buttonEnviar.textContent = "Añadir";
 
   form.append(inputNombreJuego, inputPlataformaJuego, buttonEnviar);

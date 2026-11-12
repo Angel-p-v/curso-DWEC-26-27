@@ -11,27 +11,26 @@ const formulario = createFormGames();
 const inputSearch = createSearchInput();
 
 interface AppState {
-  initialGames: readonly Game[];
+  games: Game[];
   inputSearch: string;
 }
 
-let state: AppState = { initialGames: initialGames, inputSearch: "" };
+let state: AppState = { games: initialGames.slice(), inputSearch: "" };
 
 // declaracion de funciones
 function render(): void {
   const text = state.inputSearch.trim().toLowerCase();
-  const game = state.initialGames.filter(g => g.title.toLowerCase().includes(text) || g.platform.toLowerCase().trim().includes(text));
+  const filtered = state.games.filter(g => g.title.toLowerCase().includes(text) || g.platform.toLowerCase().trim().includes(text));
 
-  const games = game.map(g => createGameItemUl(g, toggleState, gameDelete));
+  const games = filtered.map(g => createGameItemUl(g, toggleState, gameDelete));
   listGames.replaceChildren(...games);
 }
-
 
 // eventos
 function toggleState(id: number): void {
   state = {
     ...state,
-    initialGames: state.initialGames.map(g => g.id === id ? { ...g, played: !g.played } : g)
+    games: state.games.map(g => g.id === id ? { ...g, played: !g.played } : g)
   };
   render();
 }
@@ -39,13 +38,34 @@ function toggleState(id: number): void {
 function gameDelete(id: number): void {
   state = {
     ...state,
-    initialGames: state.initialGames.filter(g => g.id !== id)
-  }
+    games: state.games.filter(g => g.id !== id)
+  };
   render();
 }
 
+
 inputSearch.addEventListener("input", () => {
-  state = { ...state, inputSearch: inputSearch.value.toLowerCase().trim() }
+  state = { ...state, inputSearch: inputSearch.value.toLowerCase().trim() };
+  render();
+});
+
+formulario.addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(formulario);
+
+  const titulo = String(data.get("title") ?? "").trim();
+  const platform = String(data.get("platform") ?? "").trim();
+
+  const newId = Math.max(0, ...state.games.map((g) => g.id)) + 1;
+  const newGame = {
+    id: newId,
+    title: titulo,
+    platform: platform,
+    played: false
+  };
+
+  state = { ...state, games: [...state.games, newGame] };
+  formulario.reset();
   render();
 });
 
