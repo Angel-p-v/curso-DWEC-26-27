@@ -1,5 +1,6 @@
 import { createFormGames, createGameItemUl, createLabelResumen, createSearchInput, createTitle, createUlGames, getElement } from "./components/dom";
 import { initialGames } from "./services/games";
+import { loadGames, saveGames } from "./services/storage";
 import type { Game } from "./types/game";
 
 
@@ -9,7 +10,10 @@ interface AppState {
   inputSearch: string;
 }
 
-let state: AppState = { games: initialGames.slice(), inputSearch: "" };
+let state: AppState = {
+  games: loadGames() ?? initialGames.slice(),
+  inputSearch: ""
+};
 
 const divApp = getElement("#app", HTMLDivElement);
 const title = createTitle("Videoteca");
@@ -21,6 +25,7 @@ const labelResumen = createLabelResumen();
 
 // declaracion de funciones
 function render(): void {
+  saveGames(state.games);
   const text = state.inputSearch.trim().toLowerCase();
   const filtered = state.games.filter(g => g.title.toLowerCase().includes(text) || g.platform.toLowerCase().trim().includes(text));
 
