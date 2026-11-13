@@ -2,6 +2,7 @@ import { addActivityLi, createActivityUl, createFormActivity, createInputSearch,
 import { initialActivities } from './services/activities';
 import { loadActivities, saveActivities } from './services/storage';
 import type { Activity, Appstate } from './types/activity';
+import './style.css';
 
 // declaracion de variables
 let state: Appstate = { activities: loadActivities() ?? initialActivities.slice(), search: "" };
