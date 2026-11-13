@@ -1,10 +1,11 @@
 import { createCheckBoxFilter, createForm, createRecipeElementLi, createRecipesUl, createTitle, getElement, labelResumen } from "./components/dom";
 import { initialRecipes } from "./services/recetes";
+import { loadRecipes, saveRecipes } from "./services/storage";
 import type { AppState } from "./types/appState";
 import type { Recipe } from "./types/recipe";
 
 // declaracion de variables
-let state: AppState = { recipe: initialRecipes.slice(), onlyVegan: false };
+let state: AppState = { recipe: loadRecipes() ?? initialRecipes.slice(), onlyVegan: false };
 
 const divApp = getElement("#app", HTMLDivElement);
 const form = createForm();
@@ -16,6 +17,7 @@ const resumen = labelResumen();
 
 // declaracion de funciones
 function render(): void {
+  saveRecipes(state.recipe);
   const visibles = state.onlyVegan ? state.recipe.filter(r => r.vegetarian) : state.recipe;
 
   const recetasShow = visibles.length;
