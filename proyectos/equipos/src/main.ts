@@ -1,10 +1,11 @@
 import { createDevicesUl, createElementDiviceLi, createFormDevice, createLabelResumen, createSelectAula, createTitle, getElement } from "./components/dom";
 import { initialDevices } from "./services/devices";
+import { loadDevices, saveDevices } from "./services/storage";
 import type { AppState } from "./types/appState";
 import type { Device } from "./types/device";
 
 // declaracion de variables
-let state: AppState = { devices: initialDevices.slice(), etiqueta: "Todos" };
+let state: AppState = { devices: loadDevices() ?? initialDevices.slice(), etiqueta: "Todos" };
 
 const divApp = getElement("#app", HTMLDivElement);
 const title = createTitle("Equipos");
@@ -16,6 +17,7 @@ const resumen = createLabelResumen();
 
 // declaracion de funciones
 function render(): void {
+  saveDevices(state.devices);
   const data = state.etiqueta === "Todos" ? state.devices : state.devices.filter(d => d.room === state.etiqueta);
 
   const maxDevices = data.length;
