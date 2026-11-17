@@ -2,12 +2,16 @@
 // Empieza por src/types/book.ts (paso 1) y sigue la hoja del enunciado.
 import { createBookUl, createElementBookLi, createFormBook, createInputSearch, createParagraphResumen, createTitle, getElement } from "./componets/dom";
 import { DEFAULT_COVER, initialBooks } from "./services/books";
-import { saveBooks } from "./services/storage";
+import { loadBooks, saveBooks } from "./services/storage";
 import "./style.css";
 import type { AppState, Book } from "./types/book";
 
 // declaracion de varaibles
-let state: AppState = { books: initialBooks.slice(), search: "" };
+const persisted = loadBooks();
+let state: AppState = {
+  books: persisted ? persisted : initialBooks.slice(),
+  search: "",
+};
 const divApp = getElement("#app", HTMLDivElement);
 const title = createTitle("Mi biblioteca");
 const inputSearch = createInputSearch("Buscar por libro o autor");
