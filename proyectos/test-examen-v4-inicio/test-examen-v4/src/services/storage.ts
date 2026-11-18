@@ -1,13 +1,13 @@
 import type { Book } from "../types/book";
 
-const STORAGE_KEY = "test-examen-v4:books";
+const VITE_STORAGE_KEY = import.meta.env.VITE_STORAGE_KEY;
 
 export function saveBooks(books: Book[]): void {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(books));
+  localStorage.setItem(VITE_STORAGE_KEY, JSON.stringify(books));
 }
 
 export function loadBooks(): Book[] | null {
-  const result = localStorage.getItem(STORAGE_KEY);
+  const result = localStorage.getItem(VITE_STORAGE_KEY);
   if (!result) return null;
   try {
     return JSON.parse(result) as Book[];
