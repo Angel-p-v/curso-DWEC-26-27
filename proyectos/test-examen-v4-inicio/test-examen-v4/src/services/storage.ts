@@ -2,8 +2,13 @@ import type { Book } from "../types/book";
 
 const VITE_STORAGE_KEY = import.meta.env.VITE_STORAGE_KEY;
 
-export function saveBooks(books: Book[]): void {
-  localStorage.setItem(VITE_STORAGE_KEY, JSON.stringify(books));
+export function saveBooks(books: Book[]): boolean {
+  try {
+    localStorage.setItem(VITE_STORAGE_KEY, JSON.stringify(books));
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 export function loadBooks(): Book[] | null {
