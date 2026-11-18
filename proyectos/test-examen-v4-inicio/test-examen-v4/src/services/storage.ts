@@ -10,7 +10,9 @@ export function loadBooks(): Book[] | null {
   const result = localStorage.getItem(VITE_STORAGE_KEY);
   if (!result) return null;
   try {
-    return JSON.parse(result) as Book[];
+    const data: unknown = JSON.parse(result);
+    if (!Array.isArray(data)) return null;
+    return data as Book[];
   } catch {
     return null;
   }
